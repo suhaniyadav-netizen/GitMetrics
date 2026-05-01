@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, X, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function SearchBar() {
-  const [query, setQuery] = useState('');
+  const { username } = useParams();
+  // Initialize state with the username from the URL if it exists
+  const [query, setQuery] = useState(username || '');
   const navigate = useNavigate();
+
+  // Keep the input synced if the URL changes
+  useEffect(() => {
+    if (username) {
+      setQuery(username);
+    } else {
+      setQuery('');
+    }
+  }, [username]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,12 +28,10 @@ export default function SearchBar() {
     <form onSubmit={handleSubmit} className="relative w-full max-w-2xl mx-auto">
       <div className="flex items-center w-full p-1.5 bg-white border border-gray-200 shadow-sm rounded-2xl hover:shadow-md transition-shadow focus-within:border-gray-300 focus-within:ring-4 focus-within:ring-gray-50">
         
-       
         <div className="flex items-center justify-center pl-4 pr-2 text-gray-400">
           <Search className="w-5 h-5" />
         </div>
 
-       
         <input
           type="text"
           value={query}
@@ -30,7 +39,7 @@ export default function SearchBar() {
           placeholder="suhaniyadav"
           className="flex-1 py-3 text-lg bg-transparent outline-none text-accent placeholder-gray-400"
         />
-        
+
         {query && (
           <button
             type="button"
