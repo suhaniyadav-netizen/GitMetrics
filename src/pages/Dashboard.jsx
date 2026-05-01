@@ -7,6 +7,7 @@ import StatsRow from '../components/StatsRow';
 import ProfileCard from '../components/ProfileCard';
 import LanguageChart from '../components/LanguageChart';
 import ImpactChart from '../components/ImpactChart';
+import RepoList from '../components/RepoList';
 
 export default function Dashboard() {
   const { username } = useParams();
@@ -85,10 +86,8 @@ export default function Dashboard() {
                   <LanguageChart repos={repos} />
                   <ImpactChart repos={repos} />
                 </div>
-
-                <div className="flex items-center justify-center h-96 border border-gray-300 border-dashed rounded-2xl bg-white/50 text-gray-400">
-                  [Paginated Repository List will go here]
-                </div>
+                
+                <RepoList repos={repos} />
               </div>
             </div>
           </div>
