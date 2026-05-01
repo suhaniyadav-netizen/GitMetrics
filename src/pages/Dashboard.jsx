@@ -2,23 +2,23 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserData } from '../store/userSlice';
-import { Activity, Github, AlertCircle } from 'lucide-react';
+import { Activity, AlertCircle } from 'lucide-react'; 
 
 export default function Dashboard() {
   const { username } = useParams();
   const dispatch = useDispatch();
   
-  // Pulling state directly from our Redux store
+
   const { profile, status, error } = useSelector((state) => state.user);
 
-  // Trigger the API call as soon as the component loads
+
   useEffect(() => {
     if (username) {
       dispatch(fetchUserData(username));
     }
   }, [username, dispatch]);
 
-  // Handle Loading State
+  
   if (status === 'loading') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -27,7 +27,7 @@ export default function Dashboard() {
     );
   }
 
-  // Handle Error State (e.g., User doesn't exist or API limit reached)
+  
   if (status === 'failed') {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
@@ -44,7 +44,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen font-sans bg-gray-50 text-accent">
       
-      {/* 1:1 Top Navigation Bar */}
+     
       <header className="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200">
         <Link to="/" className="flex items-center gap-3">
           <div className="flex items-center justify-center w-8 h-8 text-white bg-black rounded-lg">
@@ -63,13 +63,26 @@ export default function Dashboard() {
             rel="noreferrer" 
             className="flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-black"
           >
-            <Github className="w-4 h-4" />
+           
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              className="w-4 h-4"
+            >
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+            </svg>
             GitHub
           </a>
         )}
       </header>
 
-      {/* Main Dashboard Layout */}
+     
       <main className="px-4 py-8 mx-auto max-w-7xl">
         {profile && (
           <div>
