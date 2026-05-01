@@ -32,3 +32,6 @@ git clone [https://github.com/suhaniyadav-netizen/GitMetrics.git](https://github
 cd GitMetrics
 npm install
 npm run dev
+
+```
+Develepoed By : Suhani Yadav
