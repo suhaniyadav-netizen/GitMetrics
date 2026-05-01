@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBar from '../components/SearchBar';
 
 export default function Home() {
   return (
@@ -19,20 +20,17 @@ export default function Home() {
           Live • powered by GitHub API
         </div>
 
-        {/* Hero Typography */}
         <h1 className="mb-6 text-5xl font-semibold tracking-tight text-accent md:text-6xl">
           Engineering intelligence, <br className="hidden md:block" />
           <span className="text-gray-400">at a glance.</span>
         </h1>
 
-
-        <p className="max-w-xl mb-10 text-lg text-gray-500">
+        <p className="max-w-xl mb-6 text-base text-gray-500 md:text-base">
           Translate any GitHub profile into a recruiter-ready analytics dashboard in seconds.
         </p>
 
-        {/* Placeholder for the Search Component we will build next */}
-        <div className="w-full p-4 mt-4 text-gray-400 border border-gray-300 border-dashed rounded-xl bg-white/50 backdrop-blur-sm">
-          [Search Bar Component goes here]
+        <div className="w-full mt-4">
+          <SearchBar />
         </div>
 
       </div>
