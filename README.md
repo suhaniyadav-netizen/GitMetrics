@@ -1,16 +1,34 @@
-# React + Vite
+# 📈 GitMetrics
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Engineering intelligence, at a glance.** 
+> Translate any GitHub profile into a recruiter-ready analytics dashboard in seconds.
 
-Currently, two official plugins are available:
+🚀 **Live Demo:** [https://git-metrics-wine.vercel.app/](https://git-metrics-wine.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![GitMetrics Preview](https://via.placeholder.com/1200x600/0f172a/ffffff?text=GitMetrics+Dashboard)
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Real-time Data Retrieval:** Connects directly to the GitHub API to fetch live profile and repository data.
+* **Intelligent Aggregation:** Dynamically calculates total cross-repository metrics (Total Stars, Total Forks).
+* **Data Visualization:** Utilizes Recharts to render beautiful, responsive charts.
+* **Advanced Pagination:** Efficiently handles developers with massive portfolios by paginating the repository list (10 per page).
+* **Seamless Navigation:** Smart, URL-synced search bar integrated directly into the dashboard.
+* **Production Ready:** Configured with custom routing rules (`vercel.json`) for flawless static deployment.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
+* **Framework:** React 18 (Vite)
+* **Styling:** Tailwind CSS
+* **State Management:** Redux Toolkit (`@reduxjs/toolkit`)
+* **Routing:** React Router v6 (`react-router-dom`)
+* **Data Fetching:** Axios
+* **Visualization:** Recharts
+* **Icons:** Lucide React
+* **Deployment:** Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Running Locally
+```bash
+git clone [https://github.com/suhaniyadav-netizen/GitMetrics.git](https://github.com/suhaniyadav-netizen/GitMetrics.git)
+cd GitMetrics
+npm install
+npm run dev
