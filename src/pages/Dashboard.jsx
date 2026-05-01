@@ -5,12 +5,13 @@ import { fetchUserData } from '../store/userSlice';
 import { Activity, AlertCircle } from 'lucide-react';
 import StatsRow from '../components/StatsRow';
 import ProfileCard from '../components/ProfileCard';
+import LanguageChart from '../components/LanguageChart';
+import ImpactChart from '../components/ImpactChart';
 
 export default function Dashboard() {
   const { username } = useParams();
   const dispatch = useDispatch();
   
- 
   const { profile, repos, status, error } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -42,8 +43,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen font-sans bg-gray-50 text-accent">
-      
-      
       <header className="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200">
         <Link to="/" className="flex items-center gap-3">
           <div className="flex items-center justify-center w-8 h-8 text-white bg-black rounded-lg">
@@ -71,34 +70,30 @@ export default function Dashboard() {
         )}
       </header>
 
-      
       <main className="px-4 py-8 mx-auto max-w-7xl">
         {profile && (
           <div className="w-full">
-            
-          
             <StatsRow profile={profile} repos={repos} />
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
-              
               <div className="md:col-span-1">
                 <ProfileCard profile={profile} />
               </div>
 
               <div className="space-y-6 md:col-span-2 lg:col-span-3">
-                <div className="flex items-center justify-center border border-gray-300 border-dashed h-72 rounded-2xl bg-white/50 text-gray-400">
-                  [Language Mix & Impact Charts will go here]
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <LanguageChart repos={repos} />
+                  <ImpactChart repos={repos} />
                 </div>
+
                 <div className="flex items-center justify-center h-96 border border-gray-300 border-dashed rounded-2xl bg-white/50 text-gray-400">
                   [Paginated Repository List will go here]
                 </div>
               </div>
-
             </div>
           </div>
         )}
       </main>
-
     </div>
   );
 }
