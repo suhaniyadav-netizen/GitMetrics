@@ -4,11 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export default function SearchBar() {
   const { username } = useParams();
-  // Initialize state with the username from the URL if it exists
+ 
   const [query, setQuery] = useState(username || '');
   const navigate = useNavigate();
 
-  // Keep the input synced if the URL changes
+
   useEffect(() => {
     if (username) {
       setQuery(username);

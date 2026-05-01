@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserData } from '../store/userSlice';
 import { Activity, AlertCircle } from 'lucide-react';
+import SearchBar from '../components/SearchBar';
 import StatsRow from '../components/StatsRow';
 import ProfileCard from '../components/ProfileCard';
 import LanguageChart from '../components/LanguageChart';
@@ -36,7 +37,7 @@ export default function Dashboard() {
         <h2 className="mb-2 text-2xl font-bold text-accent">Analysis Failed</h2>
         <p className="mb-6 text-gray-600">{error}</p>
         <Link to="/" className="px-6 py-2 font-medium text-white transition-colors rounded-xl bg-accent hover:bg-black">
-          Try another search
+          Return to Home
         </Link>
       </div>
     );
@@ -72,6 +73,11 @@ export default function Dashboard() {
       </header>
 
       <main className="px-4 py-8 mx-auto max-w-7xl">
+      
+        <div className="mb-8">
+          <SearchBar />
+        </div>
+
         {profile && (
           <div className="w-full">
             <StatsRow profile={profile} repos={repos} />
