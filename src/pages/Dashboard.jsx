@@ -10,7 +10,8 @@ export default function Dashboard() {
   const { username } = useParams();
   const dispatch = useDispatch();
   
-  const { profile, status, error } = useSelector((state) => state.user);
+ 
+  const { profile, repos, status, error } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (username) {
@@ -75,18 +76,15 @@ export default function Dashboard() {
         {profile && (
           <div className="w-full">
             
-            
-            <StatsRow profile={profile} />
+          
+            <StatsRow profile={profile} repos={repos} />
 
-            
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
               
-             
               <div className="md:col-span-1">
                 <ProfileCard profile={profile} />
               </div>
 
-             
               <div className="space-y-6 md:col-span-2 lg:col-span-3">
                 <div className="flex items-center justify-center border border-gray-300 border-dashed h-72 rounded-2xl bg-white/50 text-gray-400">
                   [Language Mix & Impact Charts will go here]
