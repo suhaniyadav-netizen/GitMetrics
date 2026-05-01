@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, Link as LinkIcon, Calendar, ExternalLink } from 'lucide-react';
 
 export default function ProfileCard({ profile }) {
-  // Format the date to look like "Sep 2025"
+ 
   const joinDate = new Date(profile.created_at).toLocaleDateString('en-US', { 
     month: 'short', 
     year: 'numeric' 
@@ -11,7 +11,7 @@ export default function ProfileCard({ profile }) {
   return (
     <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-2xl h-fit">
       
-      {/* Header: Avatar & Name */}
+      
       <div className="flex items-start gap-4 mb-6">
         <img 
           src={profile.avatar_url} 
@@ -31,12 +31,12 @@ export default function ProfileCard({ profile }) {
         </div>
       </div>
 
-      {/* Bio */}
+      
       {profile.bio && (
         <p className="mb-6 text-sm leading-relaxed text-gray-600">{profile.bio}</p>
       )}
 
-      {/* Internal Stats Box */}
+   
       <div className="grid grid-cols-3 gap-2 p-3 mb-6 text-center border border-gray-100 divide-x divide-gray-200 bg-gray-50 rounded-xl">
         <div>
           <div className="text-lg font-bold text-accent">{profile.public_repos}</div>
@@ -52,7 +52,7 @@ export default function ProfileCard({ profile }) {
         </div>
       </div>
 
-      {/* Footer Details */}
+    
       <div className="space-y-3 text-sm text-gray-600">
         {profile.location && (
           <div className="flex items-center gap-3">
