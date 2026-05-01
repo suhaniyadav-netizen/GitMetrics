@@ -1,12 +1,16 @@
 import React from 'react';
 import { BookOpen, Star, GitFork, Users } from 'lucide-react';
 
-export default function StatsRow({ profile }) {
+export default function StatsRow({ profile, repos }) {
+ 
+  const totalStars = repos.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+  const totalForks = repos.reduce((acc, repo) => acc + repo.forks_count, 0);
+
   return (
     <div className="grid grid-cols-2 mb-6 overflow-hidden bg-white border border-gray-200 divide-x divide-y shadow-sm md:grid-cols-4 rounded-2xl md:divide-y-0">
       <StatBox icon={BookOpen} label="REPOSITORIES" value={profile.public_repos} />
-      <StatBox icon={Star} label="TOTAL STARS" value="--" />
-      <StatBox icon={GitFork} label="TOTAL FORKS" value="--" />
+      <StatBox icon={Star} label="TOTAL STARS" value={totalStars} />
+      <StatBox icon={GitFork} label="TOTAL FORKS" value={totalForks} />
       <StatBox icon={Users} label="FOLLOWERS" value={profile.followers} />
     </div>
   );
