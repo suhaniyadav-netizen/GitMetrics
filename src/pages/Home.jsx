@@ -35,7 +35,7 @@ export default function Home() {
     <div className="h-screen max-h-screen bg-[#FDFCF0] dark:bg-[#0A1A14] text-[#0A1A14] dark:text-[#E8F3EE] transition-colors duration-300 flex flex-col font-sans relative overflow-hidden">
       
       <div 
-        className="absolute inset-0 z-0 opacity-[0.04] dark:opacity-[0.8] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.4] dark:opacity-[0.8] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='1.2'/%3E%3C/svg%3E")`,
           backgroundSize: '100px 20px'
