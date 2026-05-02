@@ -6,7 +6,8 @@ export default function Home() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    const theme = localStorage.theme;
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       setIsDark(true);
       document.documentElement.classList.add('dark');
     } else {
@@ -27,24 +28,27 @@ export default function Home() {
     }
   };
 
+  const handleGithubSearch = (username) => {
+    console.log("Searching for:", username);
+    // Add your API fetch logic here to update the scorecards
+  };
+
   const currentYear = new Date().getFullYear();
   const waveColor = isDark ? '%23334155' : 'currentColor';
 
   return (
     <div className="h-screen max-h-screen bg-white dark:bg-[#0A1A14] text-[#0A1A14] dark:text-[#E8F3EE] transition-colors duration-300 flex flex-col font-sans relative overflow-hidden">
-      
       <div 
-        className="absolute inset-0 z-0 opacity-[0.06] dark:opacity-[0.12] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.08] dark:opacity-[0.15] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.3'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
           backgroundSize: '100px 20px'
         }}
       />
-      
       <div 
-        className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.08] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.04] dark:opacity-[0.1] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 50 Q 25 0, 50 50 T 100 50' fill='none' stroke='${waveColor}' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 50 Q 25 0, 50 50 T 100 50' fill='none' stroke='${waveColor}' stroke-width='0.6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
         }}
       />
 
@@ -54,11 +58,8 @@ export default function Home() {
             <Activity className="w-5 h-5" />
           </div>
           <span className="text-xl font-bold tracking-tight">GitMetrics</span>
-          <span className="px-2 py-0.5 text-[10px] font-bold text-[#0A1A14]/40 dark:text-[#2DCD8D]/60 border border-current rounded uppercase tracking-widest">
-            V1.0
-          </span>
+          <span className="px-2 py-0.5 text-[10px] font-bold text-[#0A1A14]/40 dark:text-[#2DCD8D]/60 border border-current rounded uppercase tracking-widest">V1.0</span>
         </div>
-        
         <div className="flex items-center gap-6">
           <button onClick={toggleTheme} className="p-2 text-current opacity-60 hover:opacity-100 transition-opacity">
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -79,16 +80,9 @@ export default function Home() {
           Live • powered by GitHub API
         </div>
 
-        <h1 className="mb-2 text-5xl md:text-6xl font-bold tracking-tight text-[#0A1A14] dark:text-white leading-tight">
-          Engineering intelligence,
-        </h1>
-        <h2 className="mb-6 text-4xl md:text-5xl font-bold tracking-tight text-[#0A1A14]/30 dark:text-white">
-          at a glance.
-        </h2>
-
-        <p className="max-w-lg mb-10 text-sm md:text-base text-[#0A1A14]/60 dark:text-[#A8C7B9] leading-relaxed">
-          Translate any GitHub profile into a recruiter-ready analytics dashboard in seconds.
-        </p>
+        <h1 className="mb-2 text-5xl md:text-6xl font-bold tracking-tight text-[#0A1A14] dark:text-white leading-tight">Engineering intelligence,</h1>
+        <h2 className="mb-6 text-4xl md:text-5xl font-bold tracking-tight text-[#0A1A14]/30 dark:text-white">at a glance.</h2>
+        <p className="max-w-lg mb-10 text-sm md:text-base text-[#0A1A14]/60 dark:text-[#A8C7B9] leading-relaxed">Translate any GitHub profile into a recruiter-ready analytics dashboard in seconds.</p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-10">
           <StatCard icon={Book} label="REPOSITORIES" value="--" />
@@ -98,7 +92,7 @@ export default function Home() {
         </div>
 
         <div className="w-full max-w-2xl">
-          <SearchBar placeholder="suhaniyadav-netizen" />
+          <SearchBar placeholder="suhaniyadav-netizen" onSearch={handleGithubSearch} />
         </div>
       </main>
 
