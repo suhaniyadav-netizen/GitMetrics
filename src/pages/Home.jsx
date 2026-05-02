@@ -4,6 +4,14 @@ import SearchBar from '../components/SearchBar';
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [stats, setStats] = useState({
+    repos: '--',
+    stars: '--',
+    forks: '--',
+    followers: '--'
+  });
 
   useEffect(() => {
     const theme = localStorage.theme;
@@ -28,8 +36,39 @@ export default function Home() {
     }
   };
 
-  const handleGithubSearch = (username) => {
-    console.log("Searching for:", username);
+  const handleGithubSearch = async (username) => {
+    setIsLoading(true);
+    setErrorMsg('');
+    
+    try {
+      const userRes = await fetch(`https://api.github.com/users/${username}`);
+      
+      if (userRes.status === 403) {
+        throw new Error("GitHub API limit reached. Please wait a bit before searching again.");
+      }
+      if (!userRes.ok) {
+        throw new Error("User not found. Please check the username.");
+      }
+      
+      const userData = await userRes.json();
+      const repoRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+      const repos = await repoRes.json();
+      
+      const totalStars = Array.isArray(repos) ? repos.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0) : 0;
+      const totalForks = Array.isArray(repos) ? repos.reduce((acc, repo) => acc + (repo.forks_count || 0), 0) : 0;
+
+      setStats({
+        repos: userData.public_repos || 0,
+        stars: totalStars,
+        forks: totalForks,
+        followers: userData.followers || 0
+      });
+    } catch (error) {
+      setErrorMsg(error.message);
+      setStats({ repos: '--', stars: '--', forks: '--', followers: '--' });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const currentYear = new Date().getFullYear();
@@ -37,6 +76,7 @@ export default function Home() {
 
   return (
     <div className="h-screen max-h-screen bg-white dark:bg-[#0A1A14] text-[#0A1A14] dark:text-[#E8F3EE] transition-colors duration-300 flex flex-col font-sans relative overflow-hidden">
+      
       <div 
         className="absolute inset-0 z-0 opacity-[0.08] dark:opacity-[0.15] pointer-events-none"
         style={{
@@ -44,6 +84,7 @@ export default function Home() {
           backgroundSize: '100px 20px'
         }}
       />
+      
       <div 
         className="absolute inset-0 z-0 opacity-[0.04] dark:opacity-[0.1] pointer-events-none"
         style={{
@@ -59,6 +100,7 @@ export default function Home() {
           <span className="text-xl font-bold tracking-tight">GitMetrics</span>
           <span className="px-2 py-0.5 text-[10px] font-bold text-[#0A1A14]/40 dark:text-[#2DCD8D]/60 border border-current rounded uppercase tracking-widest">V1.0</span>
         </div>
+        
         <div className="flex items-center gap-6">
           <button onClick={toggleTheme} className="p-2 text-current opacity-60 hover:opacity-100 transition-opacity">
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -84,14 +126,19 @@ export default function Home() {
         <p className="max-w-lg mb-10 text-sm md:text-base text-[#0A1A14]/60 dark:text-[#A8C7B9] leading-relaxed">Translate any GitHub profile into a recruiter-ready analytics dashboard in seconds.</p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-10">
-          <StatCard icon={Book} label="REPOSITORIES" value="--" />
-          <StatCard icon={Star} label="TOTAL STARS" value="--" />
-          <StatCard icon={GitFork} label="TOTAL FORKS" value="--" />
-          <StatCard icon={Users} label="FOLLOWERS" value="--" />
+          <StatCard icon={Book} label="REPOSITORIES" value={stats.repos} />
+          <StatCard icon={Star} label="TOTAL STARS" value={stats.stars} />
+          <StatCard icon={GitFork} label="TOTAL FORKS" value={stats.forks} />
+          <StatCard icon={Users} label="FOLLOWERS" value={stats.followers} />
         </div>
 
-        <div className="w-full max-w-2xl">
-          <SearchBar placeholder="suhaniyadav-netizen" onSearch={handleGithubSearch} />
+        <div className="w-full max-w-2xl flex flex-col items-center">
+          <SearchBar placeholder="suhaniyadav-netizen" onSearch={handleGithubSearch} isLoading={isLoading} />
+          {errorMsg && (
+            <div className="mt-4 text-sm text-red-500 font-medium">
+              {errorMsg}
+            </div>
+          )}
         </div>
       </main>
 

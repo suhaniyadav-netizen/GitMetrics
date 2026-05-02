@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 
-export default function SearchBar({ placeholder, onSearch }) {
+export default function SearchBar({ placeholder, onSearch, isLoading }) {
   const [username, setUsername] = useState('');
 
   const handleSearch = () => {
-    if (username.trim() && onSearch) {
+    if (username.trim() && onSearch && !isLoading) {
       onSearch(username);
     }
   };
@@ -25,13 +25,15 @@ export default function SearchBar({ placeholder, onSearch }) {
         onChange={(e) => setUsername(e.target.value)}
         onKeyDown={handleKeyPress}
         placeholder={placeholder || "suhaniyadav-netizen"}
-        className="w-full bg-transparent border-none focus:ring-0 text-[#0A1A14] dark:text-white placeholder-gray-400"
+        disabled={isLoading}
+        className="w-full bg-transparent border-none focus:ring-0 text-[#0A1A14] dark:text-white placeholder-gray-400 disabled:opacity-50"
       />
       <button 
         onClick={handleSearch}
-        className="ml-2 p-2 bg-[#0A1A14] dark:bg-[#2DCD8D] text-white dark:text-[#0A1A14] rounded-lg font-bold text-sm px-6 hover:opacity-90 transition-opacity"
+        disabled={isLoading}
+        className="ml-2 p-2 bg-[#0A1A14] dark:bg-[#2DCD8D] text-white dark:text-[#0A1A14] rounded-lg font-bold text-sm px-6 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Analyze
+        {isLoading ? 'Searching...' : 'Analyze'}
       </button>
     </div>
   );
