@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Activity, Moon, Sun, Book, Star, GitFork, Users, MapPin, Calendar, Building, Link2 } from 'lucide-react';
 import SearchBar from '../components/SearchBar';
 
-
 const formatNumber = (num) => {
   if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
   if (num >= 1000) return (num / 1000).toFixed(1) + 'k';
   return num;
 };
-
 
 const getLangColor = (index) => {
   const colors = ['bg-[#0A1A14] dark:bg-[#2DCD8D]', 'bg-gray-400', 'bg-gray-300', 'bg-gray-200', 'bg-gray-100'];
@@ -19,7 +17,6 @@ export default function Home() {
   const [isDark, setIsDark] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  
   
   const [profile, setProfile] = useState(null);
   const [repos, setRepos] = useState([]);
@@ -73,7 +70,6 @@ export default function Home() {
       const totalStars = Array.isArray(reposData) ? reposData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0) : 0;
       const totalForks = Array.isArray(reposData) ? reposData.reduce((acc, repo) => acc + (repo.forks_count || 0), 0) : 0;
 
-      
       const langCounts = {};
       let validLangRepos = 0;
       if (Array.isArray(reposData)) {
@@ -88,7 +84,7 @@ export default function Home() {
       const langArray = Object.entries(langCounts)
         .map(([name, count]) => ({ name, percent: Math.round((count / validLangRepos) * 100) }))
         .sort((a, b) => b.percent - a.percent)
-        .slice(0, 5); 
+        .slice(0, 5);
 
       setStats({
         repos: formatNumber(userData.public_repos || 0),
@@ -114,7 +110,6 @@ export default function Home() {
   const currentYear = new Date().getFullYear();
   const waveColor = isDark ? '%23334155' : 'currentColor';
   
-  
   const topRepos = [...repos].sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 6);
   const maxImpact = Math.max(...topRepos.map(r => Math.max(r.stargazers_count, r.forks_count)), 1);
 
@@ -124,7 +119,7 @@ export default function Home() {
       <div 
         className="fixed inset-0 z-0 opacity-[0.08] dark:opacity-[0.15] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
           backgroundSize: '100px 20px'
         }}
       />
@@ -135,7 +130,6 @@ export default function Home() {
         }}
       />
 
-      
       <nav className="relative z-10 flex items-center justify-between px-8 py-6">
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center w-8 h-8 text-white bg-[#0A1A14] dark:bg-[#2DCD8D] dark:text-[#0A1A14] rounded-lg">
@@ -161,7 +155,6 @@ export default function Home() {
 
       <main className="relative z-10 flex flex-col items-center flex-grow px-4 mx-auto w-full max-w-6xl py-8">
         
-       
         {!profile && (
           <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-[11px] font-medium text-[#0A1A14]/60 dark:text-[#2DCD8D] bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-[#2DCD8D]/20 rounded-full">
@@ -176,7 +169,6 @@ export default function Home() {
           </div>
         )}
 
-        
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-8">
           <StatCard icon={Book} label="REPOSITORIES" value={stats.repos} />
           <StatCard icon={Star} label="TOTAL STARS" value={stats.stars} />
@@ -184,19 +176,15 @@ export default function Home() {
           <StatCard icon={Users} label="FOLLOWERS" value={stats.followers} />
         </div>
 
-        
         <div className="w-full max-w-2xl flex flex-col items-center mb-12">
           <SearchBar placeholder="suhaniyadav-netizen" onSearch={handleGithubSearch} isLoading={isLoading} />
           {errorMsg && <div className="mt-4 text-sm text-red-500 font-medium">{errorMsg}</div>}
         </div>
 
-       
         {profile && (
           <div className="w-full flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
             
-           
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
               
               <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20">
                 <div className="flex items-center gap-4 mb-6">
@@ -238,14 +226,12 @@ export default function Home() {
                 </div>
               </div>
 
-              
               <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20">
                 <div className="flex justify-between items-end mb-6">
                   <h3 className="font-bold text-[#0A1A14] dark:text-white">Languages</h3>
                   <span className="text-xs text-gray-500">{languages.length} detected</span>
                 </div>
                 
-               
                 <div className="w-full h-3 rounded-full overflow-hidden flex mb-6 bg-gray-100 dark:bg-gray-800">
                   {languages.map((l, i) => (
                     <div key={l.name} style={{ width: `${l.percent}%` }} className={`h-full ${getLangColor(i)}`}></div>
@@ -265,15 +251,13 @@ export default function Home() {
                 </div>
               </div>
 
-             
-              <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20 flex flex-col">
+              <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20 flex flex-col overflow-hidden">
                 <div className="flex justify-between items-end mb-6">
                   <h3 className="font-bold text-[#0A1A14] dark:text-white">Repository impact</h3>
                   <span className="text-xs text-gray-500">Top 6 • stars / forks</span>
                 </div>
                 
                 <div className="flex-grow flex items-end justify-between gap-2 h-40 border-b border-[#0A1A14]/10 dark:border-white/10 pb-2 relative">
-                 
                   <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20 dark:opacity-10">
                     <div className="border-t border-dashed border-gray-400 w-full h-0"></div>
                     <div className="border-t border-dashed border-gray-400 w-full h-0"></div>
@@ -282,7 +266,7 @@ export default function Home() {
                   </div>
 
                   {topRepos.map(repo => (
-                    <div key={repo.id} className="flex flex-col items-center justify-end h-full w-full gap-2 relative z-10">
+                    <div key={repo.id} className="flex flex-col items-center justify-end h-full flex-1 min-w-0 gap-2 relative z-10">
                       <div className="flex items-end justify-center w-full h-full gap-1">
                         <div style={{ height: `${Math.max((repo.stargazers_count / maxImpact) * 100, 2)}%` }} className="w-1/2 max-w-[12px] bg-[#0A1A14] dark:bg-white rounded-t-sm transition-all duration-1000"></div>
                         <div style={{ height: `${Math.max((repo.forks_count / maxImpact) * 100, 2)}%` }} className="w-1/2 max-w-[12px] bg-gray-400 dark:bg-gray-600 rounded-t-sm transition-all duration-1000"></div>
@@ -300,8 +284,7 @@ export default function Home() {
 
             </div>
 
-           
-            <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20">
+            <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20 overflow-hidden">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-[#0A1A14]/5 dark:border-white/5 gap-4">
                 <div>
                   <h3 className="font-bold text-lg text-[#0A1A14] dark:text-white">Repositories</h3>
