@@ -142,14 +142,14 @@ export default function Home() {
     <div className="min-h-screen bg-white dark:bg-[#0A1A14] text-[#0A1A14] dark:text-[#E8F3EE] transition-colors duration-300 flex flex-col font-sans relative overflow-x-hidden">
       
       <div 
-        className="fixed inset-0 z-0 opacity-20 dark:opacity-40 pointer-events-none"
+        className="fixed inset-0 z-0 opacity-[0.15] dark:opacity-[0.30] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
           backgroundSize: '100px 20px'
         }}
       />
       <div 
-        className="fixed inset-0 z-0 opacity-10 dark:opacity-20 pointer-events-none"
+        className="fixed inset-0 z-0 opacity-[0.08] dark:opacity-[0.15] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 50 Q 25 0, 50 50 T 100 50' fill='none' stroke='${waveColor}' stroke-width='0.6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
         }}
