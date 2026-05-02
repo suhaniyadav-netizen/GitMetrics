@@ -30,7 +30,6 @@ export default function Home() {
 
   const handleGithubSearch = (username) => {
     console.log("Searching for:", username);
-    // Add your API fetch logic here to update the scorecards
   };
 
   const currentYear = new Date().getFullYear();
