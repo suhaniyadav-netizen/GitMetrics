@@ -3,7 +3,7 @@
 > **Engineering intelligence, at a glance.** 
 > Translate any GitHub profile into a recruiter-ready analytics dashboard in seconds.
 
-🚀 **Live Demo:** [https://git-metrics-wine.vercel.app/](https://gitmetrics-sy.vercel.app/)
+🚀 **Live Demo:** [https://gitmetrics-sy.vercel.app/](https://gitmetrics-sy.vercel.app/)
 
 <img width="1878" height="874" alt="image" src="https://github.com/user-attachments/assets/c2be7241-bf89-4ce5-8e46-83a7c2aa0e7d" />
 
