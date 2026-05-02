@@ -32,11 +32,20 @@ export default function Home() {
   return (
     <div className="h-screen max-h-screen bg-[#FDFCF0] dark:bg-[#0A1A14] text-[#0A1A14] dark:text-[#E8F3EE] transition-colors duration-300 flex flex-col font-sans relative overflow-hidden">
       
+      {/* Wavy Background Pattern */}
       <div 
-        className="absolute inset-0 z-0 opacity-[0.1] dark:opacity-[0.08] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.15] dark:opacity-[0.1] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px)`,
-          backgroundSize: '40px 100%'
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='currentColor' stroke-width='1'/%3E%3C/svg%3E")`,
+          backgroundSize: '100px 20px'
+        }}
+      />
+      
+      {/* Fallback curvy texture for deeper depth */}
+      <div 
+        className="absolute inset-0 z-0 opacity-[0.05] dark:opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 50 Q 25 0, 50 50 T 100 50' fill='none' stroke='currentColor' stroke-width='2'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
         }}
       />
 
@@ -92,7 +101,6 @@ export default function Home() {
           Translate any GitHub profile into a recruiter-ready analytics dashboard in seconds.
         </p>
 
-        {/* Scorecard Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-10">
           <StatCard icon={Book} label="REPOSITORIES" value="--" />
           <StatCard icon={Star} label="TOTAL STARS" value="--" />
