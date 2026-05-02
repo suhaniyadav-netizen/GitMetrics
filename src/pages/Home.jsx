@@ -30,73 +30,53 @@ export default function Home() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 transition-colors duration-500 flex flex-col font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-white dark:bg-[#0C0C0C] text-[#1A1A1A] dark:text-[#E5E5E5] transition-colors duration-500 flex flex-col font-sans selection:bg-indigo-100 dark:selection:bg-indigo-500/30">
       
-      <div 
-        className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.1] pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(to right, #a1a1aa 1px, transparent 1px)',
-          backgroundSize: '40px 100%'
-        }}
-      />
+      {/* Structural Grid - Only visible in dark mode for depth */}
+      <div className="absolute inset-0 z-0 opacity-0 dark:opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'linear-gradient(to right, #FFF 1px, transparent 1px)', backgroundSize: '80px 100%' }} />
 
-      <nav className="relative z-10 flex items-center justify-between px-8 py-6">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 text-white bg-black dark:bg-zinc-100 dark:text-black rounded-md">
-            <Activity className="w-5 h-5" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">GitMetrics</span>
-          <span className="px-2 py-0.5 text-[10px] font-bold text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded uppercase tracking-widest">
-            V1.0
-          </span>
+      <nav className="relative z-10 flex items-center justify-between px-10 py-8">
+        <div className="flex items-center gap-3 group cursor-default">
+          <Activity className="w-6 h-6 text-black dark:text-white group-hover:rotate-12 transition-transform" />
+          <span className="text-lg font-bold tracking-tight">GitMetrics</span>
         </div>
         
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={toggleTheme}
-            className="p-2 text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
-          >
-            {isDark ? <Sun className="w-4 h-4 text-orange-400" /> : <Moon className="w-4 h-4" />}
+        <div className="flex items-center gap-8">
+          <button onClick={toggleTheme} className="text-[#A1A1A1] hover:text-black dark:hover:text-white transition-colors">
+            {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          
-          <a 
-            href="https://github.com" 
-            target="_blank" 
-            rel="noreferrer"
-            className="flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors"
-          >
-            GitHub
+          <a href="https://github.com" target="_blank" rel="noreferrer" className="text-sm font-semibold tracking-wide hover:opacity-60 transition-opacity">
+            GITHUB
           </a>
         </div>
       </nav>
 
-      <main className="relative z-10 flex flex-col items-center flex-1 px-4 pt-20 pb-20 mx-auto max-w-4xl text-center">
+      <main className="relative z-10 flex flex-col items-center flex-1 px-6 pt-28 pb-20 mx-auto max-w-4xl text-center">
         
-        <div className="flex items-center gap-2 px-3 py-1 mb-10 text-[11px] font-semibold text-zinc-500 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-full">
-          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
-          Live • powered by GitHub API
-        </div>
-
-        <h1 className="mb-4 text-5xl md:text-6xl font-bold tracking-tight text-black dark:text-zinc-50">
-          Engineering intelligence,
+        <h1 className="mb-4 text-6xl md:text-8xl font-bold tracking-tighter text-black dark:text-white leading-[0.9]">
+          Engineering <br /> intelligence.
         </h1>
-        <h2 className="mb-8 text-4xl md:text-5xl font-bold tracking-tight text-zinc-400 dark:text-zinc-500">
-          at a glance.
-        </h2>
-
-        <p className="max-w-lg mb-12 text-sm md:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
-          The refined standard for GitHub developer analytics. <br />
-          Professional dashboards generated in seconds.
+        
+        <p className="mt-8 mb-16 text-lg md:text-xl text-[#737373] dark:text-[#888888] font-medium tracking-tight">
+          Sophisticated analytics for the modern developer.
         </p>
 
-        <div className="w-full max-w-2xl mb-12 p-1.5 bg-zinc-100 dark:bg-zinc-900 rounded-2xl">
-          <SearchBar />
+        <div className="w-full max-w-xl group">
+          <div className="p-1 bg-[#F5F5F5] dark:bg-[#161616] rounded-2xl transition-all group-focus-within:ring-1 ring-black/5 dark:ring-white/10">
+            <SearchBar />
+          </div>
+          <div className="mt-6 flex justify-center gap-4 text-[10px] font-bold tracking-[0.2em] text-[#D4D4D4] dark:text-[#262626] uppercase">
+            <span>Verified API</span>
+            <span>•</span>
+            <span>No Auth Required</span>
+          </div>
         </div>
 
       </main>
 
-      <footer className="relative z-10 py-10 text-[11px] font-bold uppercase tracking-[0.2em] text-center text-zinc-300 dark:text-zinc-800">
-        &copy; {currentYear} Suhani Yadav • All rights reserved
+      <footer className="relative z-10 py-12 text-[10px] font-bold uppercase tracking-[0.3em] text-center text-[#E5E5E5] dark:text-[#1A1A1A]">
+        &copy; {currentYear} Suhani Yadav
       </footer>
     </div>
   );
