@@ -17,7 +17,7 @@ export default function SearchBar({ placeholder, onSearch, isLoading }) {
   };
 
   return (
-    <div className="flex items-center w-full px-4 py-2 bg-white dark:bg-[#11251E] rounded-xl shadow-sm border border-[#0A1A14]/10 dark:border-white/10">
+    <div className="flex items-center w-full px-4 py-2 bg-white dark:bg-[#11251E] rounded-xl shadow-sm border border-[#0A1A14]/10 dark:border-white/10 focus-within:border-[#0A1A14]/30 dark:focus-within:border-white/30 transition-colors">
       <Search className="w-5 h-5 text-gray-400 mr-3" />
       <input
         type="text"
@@ -26,7 +26,8 @@ export default function SearchBar({ placeholder, onSearch, isLoading }) {
         onKeyDown={handleKeyPress}
         placeholder={placeholder || "suhaniyadav-netizen"}
         disabled={isLoading}
-        className="w-full bg-transparent border-none focus:ring-0 text-[#0A1A14] dark:text-white placeholder-gray-400 disabled:opacity-50"
+       
+        className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 shadow-none text-[#0A1A14] dark:text-white placeholder-gray-400 disabled:opacity-50"
       />
       <button 
         onClick={handleSearch}
