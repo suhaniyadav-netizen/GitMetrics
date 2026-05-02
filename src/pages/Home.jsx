@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Moon, Sun, Book, Star, GitFork, Users, MapPin, Calendar, Building, Link2, FileText } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { Activity, Moon, Sun, Book, Star, GitFork, Users, MapPin, Calendar, Building, Link2 } from 'lucide-react';
 import SearchBar from '../components/SearchBar';
 
 const formatNumber = (num) => {
@@ -23,7 +21,6 @@ export default function Home() {
   const [profile, setProfile] = useState(null);
   const [repos, setRepos] = useState([]);
   const [languages, setLanguages] = useState([]);
-  const [readme, setReadme] = useState(null);
   const [repoSortBy, setRepoSortBy] = useState('stars');
   
   const [stats, setStats] = useState({
@@ -59,7 +56,6 @@ export default function Home() {
   const handleGithubSearch = async (username) => {
     setIsLoading(true);
     setErrorMsg('');
-    setReadme(null);
     
     try {
       const userRes = await fetch(`https://api.github.com/users/${username}`);
@@ -71,18 +67,6 @@ export default function Home() {
       
       const repoRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`);
       const reposData = await repoRes.json();
-      
-      try {
-        const readmeRes = await fetch(`https://api.github.com/repos/${username}/${username}/readme`, {
-          headers: { Accept: 'application/vnd.github.v3.raw' }
-        });
-        if (readmeRes.ok) {
-          const readmeText = await readmeRes.text();
-          setReadme(readmeText);
-        }
-      } catch (err) {
-        console.error("No README found");
-      }
       
       const totalStars = Array.isArray(reposData) ? reposData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0) : 0;
       const totalForks = Array.isArray(reposData) ? reposData.reduce((acc, repo) => acc + (repo.forks_count || 0), 0) : 0;
@@ -118,7 +102,6 @@ export default function Home() {
       setErrorMsg(error.message);
       setProfile(null);
       setRepos([]);
-      setReadme(null);
       setStats({ repos: '--', stars: '--', forks: '--', followers: '--' });
     } finally {
       setIsLoading(false);
@@ -142,14 +125,14 @@ export default function Home() {
     <div className="min-h-screen bg-white dark:bg-[#0A1A14] text-[#0A1A14] dark:text-[#E8F3EE] transition-colors duration-300 flex flex-col font-sans relative overflow-x-hidden">
       
       <div 
-        className="fixed inset-0 z-0 opacity-[0.20] dark:opacity-[0.40] pointer-events-none"
+        className="fixed inset-0 z-0 opacity-[0.15] dark:opacity-[0.30] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
           backgroundSize: '100px 20px'
         }}
       />
       <div 
-        className="fixed inset-0 z-0 opacity-[0.20] dark:opacity-[0.40] pointer-events-none"
+        className="fixed inset-0 z-0 opacity-[0.08] dark:opacity-[0.15] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 50 Q 25 0, 50 50 T 100 50' fill='none' stroke='${waveColor}' stroke-width='0.6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
         }}
@@ -168,7 +151,7 @@ export default function Home() {
           <button onClick={toggleTheme} className="p-2 text-current opacity-60 hover:opacity-100 transition-opacity">
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-          <a href="https://github.com/suhaniyadav-netizen" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-medium opacity-60 hover:opacity-100 transition-opacity">
+          <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-medium opacity-60 hover:opacity-100 transition-opacity">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-current">
               <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
               <path d="M9 18c-4.51 2-5-2-7-2"></path>
@@ -308,26 +291,6 @@ export default function Home() {
               </div>
 
             </div>
-
-            {readme && (
-              <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20">
-                <div className="flex items-center gap-2 mb-4 pb-4 border-b border-[#0A1A14]/5 dark:border-white/5">
-                  <FileText className="w-5 h-5 text-gray-400" />
-                  <h3 className="font-bold text-lg text-[#0A1A14] dark:text-white">{profile.login}/README.md</h3>
-                </div>
-                
-                <div className="prose dark:prose-invert prose-sm sm:prose-base max-w-none text-[#0A1A14]/80 dark:text-[#E8F3EE]/80
-                  prose-headings:text-[#0A1A14] dark:prose-headings:text-white prose-headings:font-bold
-                  prose-a:text-blue-500 hover:prose-a:text-blue-600
-                  prose-img:rounded-lg prose-pre:bg-[#0A1A14]/5 dark:prose-pre:bg-white/5 prose-pre:text-current
-                  prose-code:text-[#0A1A14] dark:prose-code:text-white prose-code:bg-[#0A1A14]/5 dark:prose-code:bg-white/5 prose-code:rounded prose-code:px-1
-                ">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {readme}
-                  </ReactMarkdown>
-                </div>
-              </div>
-            )}
 
             <div className="bg-white dark:bg-[#11251E] border border-[#0A1A14]/10 dark:border-white/10 rounded-xl p-6 shadow-sm shadow-black/5 dark:shadow-black/20 overflow-hidden">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-[#0A1A14]/5 dark:border-white/5 gap-4">
