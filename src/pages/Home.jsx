@@ -21,6 +21,7 @@ export default function Home() {
   const [profile, setProfile] = useState(null);
   const [repos, setRepos] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [repoSortBy, setRepoSortBy] = useState('stars');
   
   const [stats, setStats] = useState({
     repos: '--',
@@ -113,13 +114,20 @@ export default function Home() {
   const topRepos = [...repos].sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 6);
   const maxImpact = Math.max(...topRepos.map(r => Math.max(r.stargazers_count, r.forks_count)), 1);
 
+  const sortedRepos = [...repos].sort((a, b) => {
+    if (repoSortBy === 'stars') return b.stargazers_count - a.stargazers_count;
+    if (repoSortBy === 'updated') return new Date(b.updated_at) - new Date(a.updated_at);
+    if (repoSortBy === 'name') return a.name.localeCompare(b.name);
+    return 0;
+  });
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A1A14] text-[#0A1A14] dark:text-[#E8F3EE] transition-colors duration-300 flex flex-col font-sans relative overflow-x-hidden">
       
       <div 
         className="fixed inset-0 z-0 opacity-[0.08] dark:opacity-[0.15] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.1 18.3c.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5.8-.8 1.5-1.6 2.3-2.5' fill='none' stroke='${waveColor}' stroke-width='0.4'/%3E%3C/svg%3E")`,
           backgroundSize: '100px 20px'
         }}
       />
@@ -291,14 +299,29 @@ export default function Home() {
                   <span className="text-xs text-gray-500">{profile.public_repos} public • non-fork</span>
                 </div>
                 <div className="flex items-center border border-[#0A1A14]/10 dark:border-white/10 rounded-lg overflow-hidden text-xs font-medium">
-                  <button className="px-3 py-1.5 bg-[#0A1A14]/5 dark:bg-white/10 text-[#0A1A14] dark:text-white">stars</button>
-                  <button className="px-3 py-1.5 hover:bg-[#0A1A14]/5 dark:hover:bg-white/10 text-gray-500 border-l border-[#0A1A14]/10 dark:border-white/10 transition-colors">updated</button>
-                  <button className="px-3 py-1.5 hover:bg-[#0A1A14]/5 dark:hover:bg-white/10 text-gray-500 border-l border-[#0A1A14]/10 dark:border-white/10 transition-colors">name</button>
+                  <button 
+                    onClick={() => setRepoSortBy('stars')}
+                    className={`px-3 py-1.5 transition-colors ${repoSortBy === 'stars' ? 'bg-[#0A1A14]/10 dark:bg-white/20 text-[#0A1A14] dark:text-white' : 'bg-transparent text-gray-500 hover:bg-[#0A1A14]/5 dark:hover:bg-white/10'}`}
+                  >
+                    stars
+                  </button>
+                  <button 
+                    onClick={() => setRepoSortBy('updated')}
+                    className={`px-3 py-1.5 border-l border-[#0A1A14]/10 dark:border-white/10 transition-colors ${repoSortBy === 'updated' ? 'bg-[#0A1A14]/10 dark:bg-white/20 text-[#0A1A14] dark:text-white' : 'bg-transparent text-gray-500 hover:bg-[#0A1A14]/5 dark:hover:bg-white/10'}`}
+                  >
+                    updated
+                  </button>
+                  <button 
+                    onClick={() => setRepoSortBy('name')}
+                    className={`px-3 py-1.5 border-l border-[#0A1A14]/10 dark:border-white/10 transition-colors ${repoSortBy === 'name' ? 'bg-[#0A1A14]/10 dark:bg-white/20 text-[#0A1A14] dark:text-white' : 'bg-transparent text-gray-500 hover:bg-[#0A1A14]/5 dark:hover:bg-white/10'}`}
+                  >
+                    name
+                  </button>
                 </div>
               </div>
 
               <div className="flex flex-col">
-                {repos.slice(0, 5).map(repo => (
+                {sortedRepos.map(repo => (
                   <div key={repo.id} className="py-4 border-b border-[#0A1A14]/5 dark:border-white/5 last:border-0 last:pb-0 flex flex-col md:flex-row md:items-start justify-between gap-4">
                     <div>
                       <a href={repo.html_url} target="_blank" rel="noreferrer" className="font-bold text-[#0A1A14] dark:text-white text-base hover:text-blue-500 transition-colors">{repo.name}</a>
